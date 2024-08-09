@@ -1,0 +1,2 @@
+# easyerps_salla_connector
+easyerps_salla_connector odoo 16
