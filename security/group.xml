@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="salla_backend_sale" model="res.groups">
+        <field name="name">Salla Backend Sale</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+        <field name="implied_ids" eval="[(4,ref('sale.group_proforma_sales'))]"/>
+    </record>
+
+</odoo>

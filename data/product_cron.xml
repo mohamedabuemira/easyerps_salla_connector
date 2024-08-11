@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.cron" id="fetch_salla_productes_cron">
+            <field name="name">Import Salla Products</field>
+            <field name="model_id" ref="model_product_product"/>
+            <field name="state">code</field>
+            <field name="code">model.odoo_2x_read_all()</field>
+            <field name="active" eval="False"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+       
+    <!--  CATEGORY-->
+    
+    <record model="ir.cron" id="fetch_salla_product_category_cron">
+        <field name="name">Import Salla Product Categories</field>
+        <field name="model_id" ref="model_product_category"/>
+        <field name="state">code</field>
+        <field name="code">model.odoo_2x_read_all()</field>
+        <field name="active" eval="False"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+   
+    
+    </data>
+
+    
+
+</odoo>

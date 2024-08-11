@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="shippment_update_wizard_view_form" model="ir.ui.view">
+        <field name="name">salla.shippment.update.wizard.view.form</field>
+        <field name="model">salla.shippment.update.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <group >
+                    <field name="order_id" readonly="1"  />
+                    <field name="courier_id" required="1"  />
+                    <field name="shipment_type" required="1"  />
+                    <field name="overwrite_exists_pending" required="1"  />
+                    <field name="policy_options_boxes" required="1"  />
+                    <field name="payment_method_id" required="1"  />
+                    <field name="cash_on_delivery_amount" required="1"  />
+                    <field name="cash_on_delivery_currency" required="1"  />
+                    <field name="ship_to_customer" required="1"  />
+                    <field name="ship_to_name" required="1" readonly="1" force_save="1"/>
+                    <field name="ship_to_email" required="1" />
+                    <field name="ship_to_phone" required="1"  />
+                    <field name="ship_to_country" required="1"  domain="[('salla_id','!=',False)]"/>
+                    <field name="ship_to_city" required="1"  domain="[('salla_id','!=',False),('country_id','=',ship_to_country)]"/>
+                    <field name="ship_to_street_number" required="1"  />
+                    <field name="ship_to_block" required="1"  />
+                    <field name="ship_to_postal_code" required="1"  />
+                    <field name="ship_to_address_line" required="1" readonly="1" force_save="1"/>
+                    <field name="ship_from_type" required="1"  />
+                    <field name="ship_from_name" required="1"  />
+                    <field name="ship_from_company_name" required="1"  />
+                    <field name="ship_from_email" required="1"  />
+                    <field name="ship_from_phone" required="1"  />
+                    <field name="ship_from_country" required="1"  domain="[('salla_id','!=',False)]"/>
+                    <field name="ship_from_city" required="1"  domain="[('salla_id','!=',False),('country_id','=',ship_from_country)]"/>
+                    <field name="ship_from_address_line" required="1"  />
+                    <field name="ship_from_street_number" required="1"  />
+                    <field name="ship_from_block" required="1"  />
+                    <field name="ship_from_postal_code" required="1"  />
+                    <field name="ship_from_branch_id" required="1"  />
+                </group>
+                <footer>
+                    <button name="action_update" string="Create" type="object"
+                        class="btn-primary" data-hotkey="U" />
+                    <button string="Close" class="btn-default" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

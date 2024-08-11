@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="salla_webhook_event_list_view_tree" model="ir.ui.view">
+        <field name="name">salla_webhook_event_list.view.tree</field>
+        <field name="model">salla.webhook.event.list</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name"/>
+                <field name="event"/>
+            </tree>
+        </field>
+    </record>
+    <record id="salla_webhook_event_list_action" model="ir.actions.act_window">
+        <field name="name">Webhooks Event List</field>
+        <field name="res_model">salla.webhook.event.list</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <record id="salla_webhooks_view_tree" model="ir.ui.view">
+        <field name="name">salla_webhooks.view.tree</field>
+        <field name="model">salla.webhooks</field>
+        <field name="arch" type="xml">
+            <tree string="">
+<!--                <header>-->
+<!--                    <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />-->
+<!--                    <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />-->
+<!--                </header>-->
+                <field name="name"/>
+                <field name="event"/>
+                <field name="is_active" />
+            </tree>
+        </field>
+    </record>
+    <record id="salla_webhooks_view_form" model="ir.ui.view">
+        <field name="name">salla_webhooks.view.form</field>
+        <field name="model">salla.webhooks</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="Subscribe Webhooks" name="action_subscribe_webhooks"
+                        type="object" class="btn btn-success"
+                        attrs="{'invisible':[('is_active','!=',False)]}"
+                    />
+                    <button string="Deactivate Webhooks" name="action_deactivate_webhooks"
+                        type="object" class="btn btn-warning"
+                        attrs="{'invisible':[('is_active','=',False)]}"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"  required="1"/>
+                            <field name="salla_id" readonly="1" force_save="1" options="{'format': 0}" />
+                            <field name="event" required="1"/>
+                            <field name="webhook_url" readonly="1"/>
+                            <field name="is_active" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="salla_webhooks_action" model="ir.actions.act_window">
+        <field name="name">Webhooks</field>
+        <field name="res_model">salla.webhooks</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,41 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_salla_event_list,salla.event.list,model_salla_event_list,base.group_user,1,1,1,1
+access_res_company_branch,Company Branch,model_res_company_branch,base.group_user,1,1,1,1
+access_salla_webhooks,Salla Webhooks,model_salla_webhooks,base.group_user,1,1,1,1
+access_salla_webhook_event_list,Salla Webhooks Event List,model_salla_webhook_event_list,base.group_user,1,1,1,1
+access_res_city,Cities,model_res_city,base.group_user,1,1,1,1
+access_product_tags,Product Tags,model_product_tags,base.group_user,1,1,1,1
+access_sale_order_tags,Sale Order Tags,model_sale_order_tags,base.group_user,1,1,1,1
+access_consisted_product,consisted Product,model_consisted_product,base.group_user,1,1,1,1
+access_product_brand,Product Brand,model_product_brand,base.group_user,1,1,1,1
+access_salla_filter_selector,Salla filter selector,model_salla_filter_selector,base.group_user,1,1,1,1
+access_salla_sync,Salla Sync,model_salla_sync,base.group_user,1,1,1,1
+access_working_hours,Working hours,model_working_hours,base.group_user,1,1,1,1
+access_result_dialog,Result Dialog,model_result_dialog,base.group_user,1,1,1,1
+access_salla_sync_line,Salla Sync Line,model_salla_sync_line,base.group_user,1,1,1,1
+access_salla_dashboard,Salla Dashboard,model_salla_dashboard,base.group_user,1,1,1,1
+access_salla_fetch_filter_wizard,Salla Import Filter Wizard,model_salla_fetch_filter_wizard,base.group_user,1,1,1,1
+access_salla_fetch_filter,Salla Import Filter,model_salla_fetch_filter,base.group_user,1,1,1,1
+access_salla_pull_filter_wizard,Salla Pull Filter Wizard,model_salla_pull_filter_wizard,base.group_user,1,1,1,1
+access_salla_pull_filter_line,Salla Pull Filter Line,model_salla_pull_filter_line,base.group_user,1,1,1,1
+access_salla_auto_syncer_objects,auto.syncer.objects,model_auto_syncer_objects,base.group_user,1,1,1,1
+access_salla_product_fields_mapping,product.fields.mapping,model_product_fields_mapping,base.group_user,1,1,1,1
+access_salla_salla_endpoint_fields,salla.endpoint.fields,model_salla_endpoint_fields,base.group_user,1,1,1,1
+access_customer_groups,Customer Groups,model_customer_groups,base.group_user,1,1,1,1
+access_shipping_zone,ShippingZone,model_shipping_zone,base.group_user,1,1,1,1
+access_shipping_rules,ShippingRules,model_shipping_rules,base.group_user,1,1,1,1
+access_shipping_restrictions,ShippingRestrictions,model_shipping_restrictions,base.group_user,1,1,1,1
+access_shipping_company,ShippingCompany,model_shipping_company,base.group_user,1,1,1,1
+access_sale_order_status,Salla Order status,model_sale_order_status,base.group_user,1,1,1,1
+access_product_options,Salla Product Options,model_product_options,base.group_user,1,1,1,1
+access_product_options_values,Salla product.options.values,model_product_options_values,base.group_user,1,1,1,1
+access_salla_affiliates,Salla Affiliates,model_salla_affiliates,base.group_user,1,1,1,1
+access_salla_advertisement,Salla Advertisement,model_salla_advertisement,base.group_user,1,1,1,1
+access_salla_adv_type,Salla Adv type,model_salla_adv_type,base.group_user,1,1,1,1
+access_salla_order_status_update_wizard,salla_order_status_update_wizard,model_salla_order_status_update_wizard,base.group_user,1,1,1,1
+access_salla_shippment_update_wizard,salla_shippment_update_wizard,model_salla_shippment_update_wizard,base.group_user,1,1,1,1
+access_product_options_values,product.options.values,model_product_options_values,base.group_user,1,1,1,1
+access_salla_coupon,Salla Coupon,model_salla_coupon,base.group_user,1,1,1,1
+access_salla_offers,Salla Offers,model_salla_offers,base.group_user,1,1,1,1
+access_salla_coupon_groups,Salla Coupon Groups,model_salla_coupon_groups,base.group_user,1,1,1,1
+access_payment_method_list,Salla payment method list,model_payment_method_list,base.group_user,1,1,1,1

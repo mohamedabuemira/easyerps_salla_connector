@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="salla_offers_view_tree" model="ir.ui.view">
+        <field name="name">salla_offers.view.tree</field>
+        <field name="model">salla.offers</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="salla_id" />
+                <field name="name" />
+                <field name="applied_channel" />
+                <field name="offer_type" />
+            </tree>
+        </field>
+    </record>
+    <record id="salla_offers_view_form" model="ir.ui.view">
+        <field name="name">salla_offers.view.form</field>
+        <field name="model">salla.offers</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />
+                    <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+                    <button string="Active" name="action_change_status"
+                        type="object" class="btn btn-success"
+                        attrs="{'invisible':[('status','=','active')]}"
+                    />
+                    <button string="Deactivate" name="action_change_status"
+                        type="object" class="btn btn-warning"
+                        attrs="{'invisible':[('status','=','inactive')]}"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1" />
+                            <field name="applied_channel" required="1" />
+                            <field name="status" readonly="1" force_save="1" />
+                            <field name="show_discounts_table_message" readonly="1" force_save="1" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="start_date" required="1"/>
+                            <field name="expiry_date" required="1"/>
+                            <field name="message" readonly="1" force_save="1" />
+                            <field name="show_price_after_discount" readonly="1" force_save="1" invisible="1"/>
+                            
+                        </group>
+                    </group>
+                    <group>
+                        <field name="offer_type" required="1" />
+                    </group>
+                    <group name="buy_x_get_y" string="Buy X Get Y" attrs="{'invisible':[('offer_type','!=','buy_x_get_y')]}">
+                        <group name="buy" string="Buy">
+                            <field name="buy_type" attrs="{'required':[('offer_type','=','buy_x_get_y')]}"/>
+                            <field name="buy_quantity" attrs="{'required':[('offer_type','=','buy_x_get_y')]}"/>
+                            <field name="buy_products" widget="many2many_tags" domain="[ ('tmpl_salla_id', '!=', False)]" options="{'no_create': True}" attrs="{'invisible':[('buy_type','!=','product')],'required': ['&amp;',('buy_type', '=', 'product'),('offer_type','=','buy_x_get_y')]}"/>
+                            <field name="buy_categories" widget="many2many_tags" domain="[ ('salla_id', '!=', False)]" options="{'no_create': True}" attrs="{'invisible':[('buy_type','!=','category')],'required': ['&amp;',('buy_type', '=', 'category'),('offer_type','=','buy_x_get_y')]}"/>
+<!--                            <field name="buy_min_amount" />-->
+                        </group>
+                        <group name="get" string="Get">
+                            <field name="get_type" attrs="{'required':[('offer_type','=','buy_x_get_y')]}"/>
+                            <field name="get_quantity" attrs="{'required':[('offer_type','=','buy_x_get_y')]}"/>
+                            <field name="get_products" widget="many2many_tags" domain="[ ('tmpl_salla_id', '!=', False)]" options="{'no_create': True}" attrs="{'invisible':[('get_type','!=','product')],'required': ['&amp;',('get_type', '=', 'product'),('offer_type','=','buy_x_get_y')]}"/>
+                            <field name="get_categories" widget="many2many_tags" domain="[ ('salla_id', '!=', False)]" options="{'no_create': True}" attrs="{'invisible':[('get_type','!=','category')],'required': ['&amp;',('get_type', '=', 'category'),('offer_type','=','buy_x_get_y')]}"/>
+                            <field name="get_discount_type" attrs="{'required': [('offer_type', '=', 'buy_x_get_y')]}"/>
+                            <field name="get_discount_amount" attrs="{'invisible':[('get_discount_type','!=','percentage')],'required': [('get_discount_type', '=', 'percentage')]}"/>
+                        </group>
+                    </group>
+                    <group name="offers" string="Offers" attrs="{'invisible':[('offer_type','=','buy_x_get_y')]}">
+                        <field name="get_discount_amount" attrs="{'required':[('offer_type','!=','buy_x_get_y')]}"/>
+                        <field name="applied_to" attrs="{'required':[('offer_type','!=','buy_x_get_y')]}" />
+                        <field name="buy_products" widget="many2many_tags" domain="[ ('tmpl_salla_id', '!=', False)]" options="{'no_create': True}" attrs="{'invisible':[('applied_to','!=','product')],'required': [('applied_to', '=', 'product')]}"/>
+                        <field name="buy_categories" widget="many2many_tags" domain="[ ('salla_id', '!=', False)]" options="{'no_create': True}" attrs="{'invisible':[('applied_to','!=','category')],'required': [('applied_to', '=', 'category')]}"/>
+                        <field name="buy_payment_methods" widget="many2many_tags" domain="[ ('salla_id', '!=', False)]" options="{'no_create': True}" attrs="{'invisible':[('applied_to','!=','paymentMethod')],'required': [('applied_to', '=', 'paymentMethod')]}"/>
+                        <field name="minimum_application" attrs="{'required':[('offer_type','!=','buy_x_get_y')]}"/>
+                        <field name="min_purchase_amount" attrs="{'invisible':[('minimum_application','!=','purchase_amount')],'required': ['&amp;',('minimum_application', '=', 'purchase_amount'),('offer_type','!=','buy_x_get_y')]}"/>
+                        <field name="min_items_count" attrs="{'invisible':[('minimum_application','!=','items_count')],'required': ['&amp;',('minimum_application', '=', 'items_count'),('offer_type','!=','buy_x_get_y')]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="salla_offers_action" model="ir.actions.act_window">
+        <field name="name">Special Offers</field>
+        <field name="res_model">salla.offers</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

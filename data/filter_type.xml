@@ -1,0 +1,181 @@
+<odoo>
+    <data>
+        <record id="salla_endpoint_product_id_filter" model="salla.endpoint.fields">
+            <field name="name">ID</field>
+            <field name="model_name">product.product</field>
+        </record>
+        <record id="salla_endpoint_product_sku_filter" model="salla.endpoint.fields">
+            <field name="name">sku</field>
+            <field name="model_name">product.product</field>
+        </record>
+
+        <record id="sale_order_branch_filter" model="salla.filter.selector">
+            <field name="name">branch</field>
+            <field name="field_type">array</field>
+            <field name="current_model">sale.order</field>
+        </record>
+
+        <record id="sale_order_city_filter" model="salla.filter.selector">
+            <field name="name">city</field>
+            <field name="field_type">string</field>
+            <field name="current_model">sale.order</field>
+        </record>
+
+        <record id="sale_order_country_filter" model="salla.filter.selector">
+            <field name="name">country</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">sale.order</field>
+        </record>
+
+        <record id="sale_order_coupon_filter" model="salla.filter.selector">
+            <field name="name">coupon</field>
+            <field name="field_type">string</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_customer_id_filter" model="salla.filter.selector">
+            <field name="name">customer_id</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_expended_filter" model="salla.filter.selector">
+            <field name="name">expended</field>
+            <field name="field_type">bool</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_from_date_filter" model="salla.filter.selector">
+            <field name="name">from_date</field>
+            <field name="field_type">string</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_to_date_filter" model="salla.filter.selector">
+            <field name="name">to_date</field>
+            <field name="field_type">string</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_keyword_filter" model="salla.filter.selector">
+            <field name="name">keyword</field>
+            <field name="field_type">string</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_customer_id_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_payment_method_filter" model="salla.filter.selector">
+            <field name="name">payment_method</field>
+            <field name="field_type">array</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_product_filter" model="salla.filter.selector">
+            <field name="name">product</field>
+            <field name="field_type">string</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_reference_id_filter" model="salla.filter.selector">
+            <field name="name">reference_id</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_status_filter" model="salla.filter.selector">
+            <field name="name">status</field>
+            <field name="field_type">array</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="sale_order_tags_filter" model="salla.filter.selector">
+            <field name="name">tags</field>
+            <field name="field_type">array</field>
+            <field name="current_model">sale.order</field>
+        </record>
+        <record id="product_product_category_filter" model="salla.filter.selector">
+            <field name="name">category</field>
+            <field name="field_type">string</field>
+            <field name="current_model">product.product</field>
+        </record>
+        <record id="product_product_keyword_filter" model="salla.filter.selector">
+            <field name="name">keyword</field>
+            <field name="field_type">string</field>
+            <field name="current_model">product.product</field>
+        </record>
+        <record id="product_product_page_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">product.product</field>
+        </record>
+        <record id="product_product_per_page_filter" model="salla.filter.selector">
+            <field name="name">per_page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">product.product</field>
+        </record>
+        <record id="product_product_status_filter" model="salla.filter.selector">
+            <field name="name">status</field>
+            <field name="field_type">string</field>
+            <field name="current_model">product.product</field>
+        </record>
+
+        <record id="product_category_page_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">product.category</field>
+        </record>
+        <record id="product_category_keyword_filter" model="salla.filter.selector">
+            <field name="name">keyword</field>
+            <field name="field_type">string</field>
+            <field name="current_model">product.category</field>
+        </record>
+        <record id="res_company_branch_page_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">res.company.branch</field>
+        </record>
+        <record id="res_company_branch_keyword_filter" model="salla.filter.selector">
+            <field name="name">is_default</field>
+            <field name="field_type">bool</field>
+            <field name="current_model">res.company.branch</field>
+        </record>
+
+        <record id="product_brand_page_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">product.brand</field>
+        </record>
+        <record id="product_brand_keyword_filter" model="salla.filter.selector">
+            <field name="name">keyword</field>
+            <field name="field_type">string</field>
+            <field name="current_model">product.brand</field>
+        </record>
+
+        <record id="res_partner_page_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">res.partner</field>
+        </record>
+        <record id="res_partner_keyword_filter" model="salla.filter.selector">
+            <field name="name">keyword</field>
+            <field name="field_type">string</field>
+            <field name="current_model">res.partner</field>
+        </record>
+        <record id="account_tax_page_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">account.tax</field>
+        </record>
+        <record id="account_payment_method_page_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">account.payment.method</field>
+        </record>
+
+        <record id="res_country_page_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">res.country</field>
+        </record>
+        <record id="res_city_page_filter" model="salla.filter.selector">
+            <field name="name">page</field>
+            <field name="field_type">integer</field>
+            <field name="current_model">res.city</field>
+        </record>
+    </data>
+
+</odoo>

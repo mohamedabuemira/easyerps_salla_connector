@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pull_all_salla_filter_wizard" model="ir.ui.view">
+        <field name="name">Pull ALL</field>
+        <field name="model">salla.pull.filter.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group attrs="{'invisible':[('current_model','!=','all')]}">
+                    <field name="current_model" invisible="1" />
+                    <field name="user_id" invisible="1" />
+                </group>
+
+                <group attrs="{'invisible':[('current_model','!=','all')]}">
+                    <group>
+                        <field name="object_ids" widget="many2many_checkboxes" />
+                    </group>
+                    <group>
+                        <field name="select_mode" widget="radio" />
+                    </group>
+                </group>
+
+                <group attrs="{'invisible':[('current_model','!=','all')]}">
+                    <field name="message" />
+                </group>
+                <footer>
+                    <button name="action_pull_selected" string="Export" type="object"
+                        class="btn-primary" data-hotkey="F"
+                        attrs="{'invisible':[('object_ids','=',False)]}" />
+                    <button string="Cancel" class="btn-default" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_pull_salla_filter_wizard" model="ir.ui.view">
+        <field name="name">Pull</field>
+        <field name="model">salla.pull.filter.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group attrs="{'invisible':[('current_model','!=','all')]}">
+                    <field name="current_model" invisible="1" />
+                    <field name="user_id" invisible="1" />
+                </group>
+                <div style="width:100%;height:300px;overflow: auto;"
+                    attrs="{'invisible':[('current_model','=','all')]}">
+                    
+                    <div name="options" groups="base.group_user">
+                        <span class="d-inline-block">
+                            <field name="select_all"  />
+                            <label for="select_all" />
+                        </span>
+                    </div>
+                    <notebook attrs="{'invisible':[('current_model','=','all')]}">
+                        <page string="Lines to Sync">
+                            <field name="line_ids" nolabel="1" can_create="false">
+                                <tree editable="bottom" decoration-success="is_synced==True" limit="10" create="false" delete="false">
+                                    <field name="sync_id" invisible="1" />
+                                    <field name="is_synced" invisible="1" />
+                                    <field name="select" />
+                                    <field name="odoo_link_id" readonly="1" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </div>
+                <group attrs="{'invisible':[('current_model','!=','all')]}">
+                    <group>
+                        <field name="object_ids" widget="many2many_checkboxes" />
+                    </group>
+                    <group>
+                        <field name="select_mode" widget="radio" />
+                    </group>
+                </group>
+                <group>
+                    <group attrs="{'invisible':[('current_model','=','all')]}">
+                        
+                        <field name="total_records_count" />
+                        <field name="synced_records_count" />
+                        <field name="to_update_records_count" />
+                        <field name="to_create_records_count" />
+                    </group>
+                    <group>
+                        <field name="select_mode" widget="radio" />
+                    </group>
+                </group>
+                <group attrs="{'invisible':[('current_model','!=','all')]}">
+                    <field name="message" />
+                </group>
+                <footer>
+                    <button name="action_pull_selected" string="Export" type="object"
+                        class="btn-primary" data-hotkey="F"
+                        attrs="{'invisible':[('to_update_records_count','=',0),('to_create_records_count','=',0)]}" />
+                    <button string="Cancel" class="btn-default" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_minimal_pull_salla_filter_wizard" model="ir.ui.view">
+        <field name="name">Pull Minimal</field>
+        <field name="model">salla.pull.filter.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group invisible="1">
+                    <field name="current_model" readonly="1" />
+                </group>
+                <group>
+                    <field name="endpoint_field_id" widget="radio" required="1"
+                        domain="[('model_name','=',current_model)]" options="{'horizontal': true}" />
+                    <field name="value" options="{'format': 0}"/>
+                </group>
+                <footer>
+                    <button name="minimal_pull" string="Export" type="object" class="btn-primary"
+                        data-hotkey="F" />
+                    <button string="Close" class="btn-default" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pull_filter_salla_wizard" model="ir.actions.act_window">
+        <field name="name">Pull Filter</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">salla.pull.filter.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_pull_salla_filter_wizard" />
+        <field name="target">new</field>
+    </record>
+</odoo>

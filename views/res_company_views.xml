@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_company_view_tree" model="ir.ui.view">
+        <field name="name">res_company.view.tree</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[last()]" position="after">
+                <field name="salla_merchant_id" options="{'format': 0}" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_company_view_form" model="ir.ui.view">
+        <field name="name">res_company.view.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <!--
+                    <button string="Reset Salla" name="action_reset_salla" type="object"
+                        class="oe_highlight"
+                    attrs="{'invisible':['|','|',('is_salla_shop','=',False),('salla_auth_code','=',False),('debug_mode','=',False)]}"
+                    />
+                    -->
+                    <button string="Build Dash" name="action_build_dashboard" type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible':['|',('is_salla_shop','=',False),('salla_auth_code','=',False)]}" />
+<!--                    <button string="Get Merchant" name="get_merchant_profile" type="object"-->
+<!--                        class="oe_highlight"-->
+<!--                        attrs="{'invisible':['|',('is_salla_shop','=',False),('salla_access_token','=',False)]}" />-->
+                    <button string="Get Store Info" name="get_store_profile" type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible':['|',('is_salla_shop','=',False),('salla_access_token','=',False)]}" />
+
+                    <button string="Request Token" name="action_request_salla_token" type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible':['|','|',('is_salla_shop','=',False),('salla_auth_code','=',False),('salla_access_token','!=',False)]}" />
+                    <button string="Refresh Token" name="action_request_salla_token" type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible':['|','|',('is_salla_shop','=',False),('salla_auth_code','=',False),('salla_access_token','=',False)]}" />
+<!--                    <button string="Subscribe Webhooks" name="action_subscribe_webhooks"-->
+<!--                        type="object" class="oe_highlight"-->
+<!--                        attrs="{'invisible':['|','|',('is_salla_shop','=',False),('salla_auth_code','=',False),('salla_webhook_events_ids','=',False)]}"-->
+<!--                    />-->
+<!--                    <button string="Deactivate Webhooks" name="action_deactivate_webhooks"-->
+<!--                        type="object" class="oe_highlight"-->
+<!--                        attrs="{'invisible':['|','|',('is_salla_shop','=',False),('salla_auth_code','=',False),('salla_webhook_events_ids','=',False)]}"-->
+<!--                    />-->
+                    
+
+<!--                    <button string="Import All" name="sync_from_salla" type="object"-->
+<!--                        class="btn btn-success"-->
+<!--                        attrs="{'invisible':['|','|',('is_salla_shop','=',False),('salla_auth_code','=',False),('salla_access_token','=',False)]}" />-->
+<!--                    <button string="Push All" name="sync_to_salla" type="object"-->
+<!--                        class="btn btn-warning"-->
+<!--                        attrs="{'invisible':['|','|',('is_salla_shop','=',False),('salla_auth_code','=',False),('salla_access_token','=',False)]}" />-->
+                </header>
+            </xpath>
+            <xpath expr="//notebook" position="before">
+                <div class="oe_title mb24">
+                    <field name="is_salla_shop"  />
+                    <label for="is_salla_shop" />
+                </div>
+            </xpath>
+            <xpath expr="//page[last()]" position="after">
+                <page name="salla_credentials" string="Salla Connection"
+                    attrs="{'invisible':[('is_salla_shop','=',False)]}">
+                    <group  name="sync" string="Synchronize and Autorization Data">
+                        <group>
+                            <label for="id" string="Company ID"/>
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <field name="id" readonly="1" force_save="1" />
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                        <label for="easyerps_api_key"/>
+                        <div class="o_setting_right_pane">
+                            <div>
+                                <field name="easyerps_api_key" readonly="1" force_save="1" />
+                            </div>
+                            <div class="text-muted">
+                                <button name="action_genrerate_apikey" string="Generate API Key"
+                            type="object" class="oe_highlight" />
+                            </div>
+                        </div>
+                        </group>
+
+                    </group>
+                    <group name="store_info" string="Store Info">
+                        <group>
+                            <field name="salla_merchant_id" readonly="1" force_save="1" options="{'format': 0}" />
+                            <field name="store_name" readonly="1" force_save="1" />
+                            <field name="store_email" readonly="1" force_save="1" />
+                            <field name="store_plan" readonly="1" force_save="1" />
+                            <field name="store_domain" readonly="1" force_save="1" />
+                            <field name="store_description" readonly="1" force_save="1" />
+                        </group>
+                        <group>
+                            <field name="store_avatar" widget="image" readonly="1" force_save="1" />
+                        </group>
+                    </group>
+                    <group name="synchronisation" string="Auto Synchronization">
+                       <group >
+                            <field name="auto_syncers_ids" nolabel="1" widget="many2many_checkboxes" />
+                        </group>
+                        <group>
+                            <field name="shipping_cost_product_id" attrs="{'required': [('is_salla_shop', '=', True)]}" domain="[('type', '=', 'service'), '|', ('company_id', '=', id), ('company_id', '=', False)]" context="{'default_detailed_type': 'service', 'default_taxes_id': False }"/>
+                            <field name="cod_cost_product_id" attrs="{'required': [('is_salla_shop', '=', True)]}" domain="[('type', '=', 'service'), '|', ('company_id', '=', id), ('company_id', '=', False)]" context="{'default_detailed_type': 'service', 'default_taxes_id': False }"/>
+                            <field name="status_to_confirm"  />
+                            <field name="status_to_set_delivery_done"  />
+                            <field name="status_to_create_invoice"  />
+                            <field name="validate_invoice"  attrs="{'invisible': [('status_to_create_invoice', '=', False)]}"/>
+                            <field name="atu_payment_register"  attrs="{'invisible': [('validate_invoice', '=', False)]}"/>
+                            <field name="journal_id"  options="{'no_open': True, 'no_create': True}" attrs="{'invisible': [('atu_payment_register', '=', False)], 'required': [('atu_payment_register', '=', True)]}"/>
+                        </group>
+
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="salla_auth_code" invisible="1" />
+                        </group>
+                    </group>
+
+                    <group string="Token" invisible="1">
+                        <group>
+                            <field name="salla_expires" readonly="1" force_save="1" />
+                             <label for="salla_access_token" string="Token"/>
+                                    <div class="o_address_format">
+                            <field name="salla_access_token" readonly="1" force_save="1" />
+                                    </div>
+                            <field name="salla_expires_date" readonly="1" force_save="1" />
+                            <field name="salla_refresh_token" readonly="1" force_save="1" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+                <xpath expr="//page[last()]" position="after">
+                <page name="salla_seo" string="Salla SEO" attrs="{'invisible':[('is_salla_shop','=',False)]}">
+                    <group>
+                        <button string="Get SEO Settings" name="action_list_seo" type="object"
+                        class="btn btn-success"
+                        attrs="{'invisible':['|','|',('is_salla_shop','=',False),('salla_auth_code','=',False),('salla_access_token','=',False)]}" />
+                        <button string="Update SEO Settings" name="action_put_seo" type="object"
+                        class="btn btn-warning"
+                        attrs="{'invisible':['|','|',('is_salla_shop','=',False),('salla_auth_code','=',False),('salla_access_token','=',False)]}" />
+                    </group>
+                    <group>
+                        <group>
+                            <field name="salla_seo_title" />
+                            <field name="salla_seo_keywords" />
+                            <field name="salla_seo_description" />
+                        </group>
+                        <group>
+
+
+                            <field name="salla_seo_url" />
+                            <field name="salla_seo_friendly_urls_status" />
+                            <field name="salla_seo_refresh_sitemap" />
+                        </group>
+                    </group>
+
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="salla_dashboard__store_config_action" model="ir.actions.act_window">
+        <field name="name">Stores</field>
+        <field name="res_model">res.company</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_salla_shop','=',True)]</field>
+        <field name="context">{'create':False}</field>
+    </record>
+</odoo>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_minima_sync_wizard" model="ir.ui.view">
+        <field name="name">Salla Sync Wizard</field>
+        <field name="model">salla.sync</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="current_model" invisible="1" />
+                    <field name="user_id" invisible="1" />
+                </group>
+                <group>
+                    <group>
+                        <field name="line_ids" invisible="1" />
+                        <field name="record_to_fetch" invisible="1" />
+                        <field name="message" nolabel="1" readonly="1" />
+                    </group>
+                    <group>
+
+                        <field name="select_mode" widget="radio" />
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_fetch_selected" string="Confirm" type="object"
+                        class="btn-primary" data-hotkey="F"
+                        attrs="{'invisible':[('record_to_fetch','=',0)]}" />
+                    <button string="Cancer" class="btn-default" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_salla_sync_wizard" model="ir.ui.view">
+        <field name="name">Salla Sync Wizard</field>
+        <field name="model">salla.sync</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="current_model" invisible="1" />
+                    <field name="user_id" invisible="1" />
+                </group>
+                <div style="width:100%;height:300px;overflow: auto;"
+                    attrs="{'invisible':[('current_model','=','all')]}">
+                    <div name="options" groups="base.group_user">
+                        <span class="d-inline-block">
+                            <field name="select_all" />
+                            <label for="select_all" />
+                        </span>
+                    </div>
+                    <notebook>
+                        <page string="Lines">
+                            <field name="line_ids" nolabel="1" can_create="false">
+                                <tree editable="bottom" limit="10" create="false" delete="false">
+                                    <field name="sync_id" invisible="1" />
+                                    <field name="selected" />
+                                    <field name="name" />
+                                    <field name="odoo_link_id" readonly="1" force_save="1" />
+                                    <field name="rawdata" optional="hide" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </div>
+                <notebook>
+                    <page name="statistics" string="Statistics">
+                        <group>
+                            <group>
+                                <field name="record_count" readonly="1" force_save="1" />
+                                <field name="record_to_fetch" readonly="1" force_save="1" />
+                            </group>
+                            <group>
+
+                                <field name="select_mode" widget="radio" />
+                            </group>
+
+                        </group>
+                    </page>
+                    <page name="adv_options" string="Advanced Options"
+                        attrs="{'invisible':[('current_model','!=','product.product')]}">
+                        <group name="options" string="All Fields">
+                            <span class="d-inline-block">
+                                <field name="all_fields" />
+                                <label for="all_fields" />
+                            </span>
+                        </group>
+                        <group name="selected_fields" string="Selected"
+                            attrs="{'invisible':[('all_fields','=',True)]}">
+                            <field name="mapped_fields_ids" widget="many2many_checkboxes"
+                            />
+                        </group>
+                    </page>
+                </notebook>
+
+                <footer>
+                    <button name="action_fetch_selected" string="Import Selection" type="object"
+                        class="btn-primary" data-hotkey="F"
+                        attrs="{'invisible':[('record_to_fetch','=',0)]}" />
+                    <button string="Close" class="btn-default" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_salla_first_merge_sync_wizard" model="ir.ui.view">
+        <field name="name">Salla Sync Wizard Minimal</field>
+        <field name="model">salla.sync</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="current_model" invisible="1" />
+                    <field name="user_id" invisible="1" />
+                </group>
+                <div style="width:100%;height:300px;overflow: auto;">
+                    <group string="Lines">
+                        <field name="line_id" nolabel="1" can_create="false" domain="[('odoo_link_id','=',False)]">
+                        </field>
+                    </group>
+                </div>
+
+                <notebook>
+                    <page name="adv_options" string="Advanced Options"
+                        attrs="{'invisible':[('current_model','!=','product.product')]}">
+                        <group name="options" string="All Fields">
+                            <span class="d-inline-block">
+                                <field name="all_fields" />
+                                <label for="all_fields" />
+                            </span>
+                        </group>
+                        <group name="selected_fields" string="Selected"
+                            attrs="{'invisible':[('all_fields','=',True)]}">
+                            <field name="mapped_fields_ids" widget="many2many_checkboxes"
+                            />
+                        </group>
+                    </page>
+                </notebook>
+
+                <footer>
+                    <button name="merge_first_fetch" string="Merge" type="object"
+                        class="btn-primary" data-hotkey="F"
+                        attrs="{'invisible':[('line_id','=',False)]}" />
+                    <button string="Close" class="btn-default" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_salla_merge_sync_wizard" model="ir.ui.view">
+        <field name="name">Salla Sync Wizard Minimal</field>
+        <field name="model">salla.sync</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="current_model" invisible="1" />
+                    <field name="user_id" invisible="1" />
+                </group>
+                <div style="width:100%;height:300px;overflow: auto;">
+                    <notebook>
+                        <page string="Lines">
+                            <field name="line_ids" nolabel="1" can_create="false">
+                                <tree editable="bottom" limit="10" create="false">
+                                    <field name="sync_id" invisible="1" />
+                                    <field name="selected" />
+                                    <field name="name" />
+                                    <field name="odoo_link_id" readonly="1" force_save="1" />
+                                    <field name="rawdata" optional="hide" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </div>
+                <notebook>
+                    <page name="adv_options" string="Advanced Options"
+                        attrs="{'invisible':[('current_model','!=','product.product')]}">
+                        <group name="options" string="All Fields">
+                            <span class="d-inline-block">
+                                <field name="all_fields" />
+                                <label for="all_fields" />
+                            </span>
+                        </group>
+                        <group name="selected_fields" string="Selected"
+                            attrs="{'invisible':[('all_fields','=',True)]}">
+                            <field name="mapped_fields_ids" widget="many2many_checkboxes"
+                            />
+                        </group>
+                    </page>
+                </notebook>
+
+                <footer>
+                    <button name="merge_selected" string="Merge" type="object"
+                        class="btn-primary" data-hotkey="F"
+                        attrs="{'invisible':[('line_ids','=',False)]}" />
+                    <button string="Close" class="btn-default" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sall_sync" model="ir.actions.act_window">
+        <field name="name">Salla Sync</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">salla.sync</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_salla_sync_wizard" />
+        <field name="target">new</field>
+    </record>
+</odoo>

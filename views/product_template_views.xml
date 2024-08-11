@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_product_view_form" model="ir.ui.view">
+        <field name="name">product_product.view.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'required': [('is_salla_product', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='lst_price']" position="attributes">
+                <attribute name="attrs">{'required': [('is_salla_product', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='image_1920']" position="attributes">
+                <attribute name="attrs">{'required': [('is_salla_product', '=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_open_label_layout']" position="after">
+                <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />
+                <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+                <button string="Update Image" type="object" name="odoo_2x_attach_image" class="btn btn-success" />
+            </xpath>
+            <xpath expr="//div[@name='options']" position="inside">
+                <field name="is_salla_checker" invisible="1" />
+                <span class="d-inline-block">
+                    <field name="is_salla_product" />
+                    <label for="is_salla_product" />
+                </span>
+            </xpath>
+            <xpath expr="//page[last()]" position="after">
+                <page name="salla_info" string="Salla">
+                    <group>
+                        <group>
+                            <field name="tmpl_salla_id" string="SALLA ID" readonly="1"
+                                force_save="1" options="{'format': 0}" />
+                            <field name="salla_main_image_id" readonly="1" force_save="1" invisible="1"/>
+                            <field name="salla_main_image_url" readonly="1" force_save="1" invisible="1"/>
+                            <field name="salla_status" />
+                            <field name="product_type" attrs="{'required': [('is_salla_product', '=', True)]}"/>
+                            <field name="brand_id" />
+                            <field name="salla_gtin" />
+                            <field name="salla_mpn" />
+                            <field name="salla_hide_quantity" />
+                            <field name="calories" />
+                            <field name="salla_enable_upload_image" />
+                            <field name="salla_subtitle" />
+                            <field name="salla_promotion_title" />
+                            <field name="max_items_per_user" />
+                            <field name="maximum_quantity_per_order" />
+                            <field name="require_shipping" />
+                            <field name="url_admin" readonly="1" />
+                            <field name="url_customer" readonly="1" />
+                            <field name="with_tax" />
+                            <field name="show_in_app" />
+                            <field name="managed_by_branches" />
+                        </group>
+                        <group>
+                            <field name="salla_sale_price" />
+                            <field name="sale_end_date" />
+                            <field name="salla_enable_note" />
+                            <field name="salla_pinned" />
+                            <field name="salla_active_advance" />
+                            <field name="salla_metadata_title" />
+                            <field name="salla_metadata_description" />
+                            <field name="salla_weight" />
+                            <field name="salla_weight_type" />
+                            <field name="tags" widget="many2many_tags" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description_sale" />
+                    </group>
+                    <notebook attrs="{'invisible':[('product_type','!=','group_products')]}">
+                        <page name="consisted_product_s" string="Consisted Products">
+                            <field name="consisted_products_ids" widget="one2many" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="quantity" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+                <page name="salla_options" string="Salla Options">
+                    <group>
+                        <button string="Create Options" type="object" name="action_create_options"
+                            class="btn btn-success" />
+
+                        <button string="Update Options" type="object" name="action_update_options"
+                            class="btn btn-warning"
+                            attrs="{'invisible':[('options_ids','=',False)]}" />
+                    </group>
+                    <notebook >
+                        <page string="Options">
+                            <field name="options_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="product_id" invisible="1" />
+                                    <field name="salla_id" readonly="1" force_save="1" />
+                                    <field name="name" />
+                                    <field name="display_type" />
+                                    <field name="value_ids" widget="many2many_tags"
+                                        domain="[('option_id','=',salla_id)]" />
+                                    <button string="Configure" class="float-right btn-secondary"
+                                        type="object" name="action_open_attribute_values"
+                                    />
+                                    <button string="Get Options" type="object" name="action_get_options"
+                                        class="btn btn-primary"
+                                        attrs="{'invisible':['|',('salla_id','=',False),('salla_id','&lt;=',0)]}" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+                <page name="digital_options" string="Digital product"
+                    attrs="{'invisible':['|','|',('tmpl_salla_id','&lt;=',0),('tmpl_salla_id','=',False),('product_type','!=','digital')]}">
+                    <group>
+                        <button string="Attach Code" type="object" name="action_attach_digital_code"
+                            class="btn btn-primary" />
+                        <button string="Attach File" type="object" name="action_attach_digital_file"
+                            class="btn btn-primary" />
+                        <button string="Delete File" type="object" name="action_delete_digital_file"
+                            class="btn btn-primary" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

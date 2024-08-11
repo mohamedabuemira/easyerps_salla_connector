@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale_order.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='authorized_transaction_ids']" position="after">
+                <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />
+<!--                <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />-->
+<!--                <button string="Create Shipment" type="object" name="action_create_shipment" class="btn btn-success" attrs="{'invisible':[('is_salla','=',False)]}"/>-->
+                <button string="Get Shipment" type="object" name="action_get_shipment" class="btn btn-success" attrs="{'invisible':[('is_salla','=',False)]}"/>
+<!--                <button string="Return Shipment" type="object" name="action_return_shipment" class="btn btn-warning" attrs="{'invisible':[('is_salla','=',False)]}"/>-->
+                
+<!--                <button string="Update Shipment" type="object" name="action_update_shipment" class="btn btn-success" attrs="{'invisible':[('is_salla','=',False)]}"/>-->
+<!--                <button string="Cancel Shipment" type="object" name="action_cancel_shipment" class="btn btn-danger" attrs="{'invisible':[('is_salla','=',False)]}"/>-->
+                <button string="Update Status" type="object" name="action_update_status" class="btn btn-success" attrs="{'invisible':[('is_salla','=',False)]}"/>
+            </xpath>
+            <xpath expr="//div[@class='oe_title']" position="after">
+                <div name="options" >
+                    <field name="is_salla_checker" invisible="1" />
+                    <field name="is_policy" invisible="1" />
+                    <span class="d-inline-block">
+                        <field name="is_salla" />
+                        <label for="is_salla" />
+                    </span>
+                </div>
+            </xpath>
+            <group name="sale_header" position="after">
+                    <group name="salla_details" attrs="{'invisible': [('is_salla', '=', False)]}">
+                        <group name="salla_order_info" string="Salla Order Info">
+<!--                            <field name="urls_customer" />-->
+<!--                            <field name="urls_admin" />-->
+                            <field name="is_pending_payment" invisible="1"/>
+                            <field name="source" readonly="1" force_save="1"/>
+                            <field name="status" readonly="1" force_save="1"/>
+                            <field name="payment_status" required="1" readonly="1" force_save="1"/>
+                            <field name="payment_method" readonly="1" force_save="1" attrs="{'invisible': [('is_pending_payment', '!=', False)],'required': [('payment_status', '=', 'paid')]}" domain="[ ('salla_id', '!=', False)]"/>
+                            <field name="accepted_methods" widget="many2many_tags" invisible="1" domain="[ ('salla_id', '!=', False)]"/>
+                            <field name="pickup_branch" readonly="1" force_save="1" widget="res_partner_many2one" attrs="{'invisible': [('pickup_branch', '=', False)]}"/>
+                            <field name="is_cod_available" readonly="1" force_save="1" attrs="{'invisible': [('pickup_branch', '=', False)]}"/>
+                            <field name="shipment_branch" readonly="1" force_save="1" widget="res_partner_many2one" attrs="{'invisible': [('pickup_branch', '!=', False)]}"/>
+                            <field name="tags" widget="many2many_tags" readonly="1" force_save="1"/>
+                        </group>
+                        <group name="salla_shipment" string="Salla Shipment" attrs="{'invisible': [('pickup_branch', '!=', False)]}">
+                            <div class="oe_right" attrs="{'invisible':['|',('is_salla','=',False),('is_policy','=',False)]}">
+                                <div class="oe_right">
+                                    <button name="action_cancel_shipment" class="btn btn-danger" string="Cancel Shipment" type="object"
+                                            help="by clicking this button you will cancel the shipment"
+                                            states="draft,sent,sale"/>
+                                </div>
+                                <div class="oe_right">
+                                    <button name="action_open_tracking_link" class="btn btn-success" string="Shipment status tracking" type="object"
+                                            states="draft,sent,sale"/>
+                                </div>
+                                <div class="oe_right">
+                                    <button name="action_policy_printing" class="btn btn-success" string="Print Policy" type="object"
+                                            states="draft,sent,sale"/>
+                                </div>
+                            </div>
+
+                            <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                <group colspan="4">
+                                    <field name="shipments_courier_logo" widget="image" colspan="1" nolabel="1" readonly="1" force_save="1"/>
+                                </group>
+                            </group>
+                            <field name="shipments_courier_name" nolabel="1" colspan="100" readonly="1" force_save="1"/>
+                            <field name="shipments_ship_to_address_line" nolabel="1" colspan="100" readonly="1" force_save="1"/>
+                            <field name="shipment_id"  attrs="{'invisible':['|',('is_salla','=',False),('is_policy','=',False)]}" string="Waybill" colspan="100" readonly="1" force_save="1"/>
+                            <field name="shipment_pickup_id"  string="References number" colspan="100" readonly="1" force_save="1"
+                                   attrs="{'invisible':['|',('is_salla','=',False),('is_policy','=',False)]}"/>
+                            <field name="shipment_tracking_link"  string="Shipment status tracking" colspan="100" readonly="1" force_save="1"
+                                   attrs="{'invisible':['|',('is_salla','=',False),('is_policy','=',False)]}"/>
+                        </group>
+<!--                        <group name="salla_shipping" string="Shipping">-->
+<!--                            <field name="order_shipping_id" readonly="1" force_save="1"/>-->
+<!--                            <field name="app_id" />-->
+<!--                            <field name="order_shipping_company" />-->
+<!--                            <field name="shipping_company_logo" widget="image"/>-->
+<!--                            <field name="receiver_name"/>-->
+<!--                            <field name="receiver_email" readonly="1" force_save="1"/>-->
+<!--                            <field name="receiver_phone"/>-->
+<!--                            <field name="shipper_name" />-->
+<!--                            <field name="shipper_company_name" />-->
+<!--                            <field name="shipper_email" />-->
+<!--                            <field name="shipper_phone" />-->
+<!--                            <field name="pickup_address_country" />-->
+<!--                            <field name="pickup_address_country_code" />-->
+<!--                            <field name="pickup_address_city" />-->
+<!--                            <field name="pickup_address_shipping_address" />-->
+<!--                            <field name="pickup_address_street_number" />-->
+<!--                            <field name="pickup_address_block" />-->
+<!--                            <field name="pickup_address_postal_code" />-->
+<!--                            <field name="address_country" />-->
+<!--                            <field name="address_country_code" />-->
+<!--                            <field name="address_city" />-->
+<!--                            <field name="address_shipping_address" />-->
+<!--                            <field name="address_street_number" />-->
+<!--                            <field name="address_block" />-->
+<!--                            <field name="address_postal_code" />-->
+<!--                            <field name="shipment_id" />-->
+<!--                            <field name="shipment_pickup_id" />-->
+<!--                            <field name="shipment_tracking_link" />-->
+<!--                            <field name="shipment_label_format" />-->
+<!--                            <field name="shipment_label_url" />-->
+<!--                            <field name="policy_options_boxes" />-->
+<!--                        </group>-->
+<!--                        <group name="salla_shipment" string="Salla Shipment">-->
+<!--                            <field name="shipments_id" />-->
+<!--                            <field name="shipments_created_at" />-->
+<!--                            <field name="shipments_type" />-->
+<!--                            <field name="shipments_courier_id" />-->
+<!--                            <field name="shipments_courier_name" />-->
+<!--                            <field name="shipments_courier_logo" widget="image"/>-->
+<!--                            <field name="shipments_shipping_number" />-->
+<!--                            <field name="shipments_tracking_number" />-->
+<!--                            <field name="shipments_pickup_id" />-->
+<!--                            <field name="shipments_trackable" />-->
+<!--                            <field name="shipments_tracking_link" />-->
+<!--                            <field name="shipments_label_format" />-->
+<!--                            <field name="shipments_label_url" />-->
+<!--                            <field name="shipments_payment_method" />-->
+<!--                            <field name="shipments_source" />-->
+<!--                            <field name="shipments_total_amount" />-->
+<!--                            <field name="shipments_total_currency" />-->
+<!--                            <field name="shipments_cash_on_delivery_amount" />-->
+<!--                            <field name="shipments_cash_on_delivery_currency" />-->
+<!--                            <field name="shipments_ship_to_type" />-->
+<!--                            <field name="shipments_ship_to_name" />-->
+<!--                            <field name="shipments_ship_to_email" />-->
+<!--                            <field name="shipments_ship_to_phone" />-->
+<!--                            <field name="shipments_ship_to_country" />-->
+<!--                            <field name="shipments_ship_to_country_code" />-->
+<!--                            <field name="shipments_ship_to_city" />-->
+<!--                            <field name="shipments_ship_to_address_line" />-->
+<!--                            <field name="shipments_ship_to_street_number" />-->
+<!--                            <field name="shipments_ship_to_block" />-->
+<!--                            <field name="shipments_ship_to_postal_code" />-->
+<!--                            <field name="shipments_ship_from_type" />-->
+<!--                            <field name="shipments_ship_from_name" />-->
+<!--                            <field name="shipments_ship_from_company_name" />-->
+<!--                            <field name="shipments_ship_from_email" />-->
+<!--                            <field name="shipments_ship_from_phone" />-->
+<!--                            <field name="shipments_ship_from_country" />-->
+<!--                            <field name="shipments_ship_from_city" />-->
+<!--                            <field name="shipments_ship_from_address_line" />-->
+<!--                            <field name="shipments_ship_from_street_number" />-->
+<!--                            <field name="shipments_ship_from_block" />-->
+<!--                            <field name="shipments_ship_from_postal_code" />-->
+<!--                            <field name="shipments_ship_from_branch_id" widget="res_partner_many2one"/>-->
+<!--                            <field name="shipments_total_weight_value" />-->
+<!--                            <field name="shipments_total_weight_units" />-->
+<!--                            <field name="shipments_is_international" />-->
+<!--                            <field name="shipments_meta_app_id" />-->
+<!--                            <field name="shipments_meta_policy_options_boxes" />-->
+<!--                        </group>-->
+                    </group>
+                </group>
+        </field>
+    </record>
+
+</odoo>

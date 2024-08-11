@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="all" model="payment.method.list">
+            <field name="name">all</field>
+        </record>
+        <record id="apple_pay" model="payment.method.list">
+            <field name="name">apple_pay</field>
+        </record>
+        <record id="bank" model="payment.method.list">
+            <field name="name">bank</field>
+        </record>
+        <record id="cod" model="payment.method.list">
+            <field name="name">cod</field>
+        </record>
+        <record id="credit_card" model="payment.method.list">
+            <field name="name">credit_card</field>
+        </record>
+        <record id="knet" model="payment.method.list">
+            <field name="name">knet</field>
+        </record>
+        <record id="mada" model="payment.method.list">
+            <field name="name">mada</field>
+        </record>
+        <record id="paypal" model="payment.method.list">
+            <field name="name">paypal</field>
+        </record>
+        <record id="spotii_pay" model="payment.method.list">
+            <field name="name">spotii_pay</field>
+        </record>
+        <record id="stc_pay" model="payment.method.list">
+            <field name="name">stc_pay</field>
+        </record>
+        <record id="tabby_installment" model="payment.method.list">
+            <field name="name">tabby_installment</field>
+        </record>
+        <record id="tamara_installment" model="payment.method.list">
+            <field name="name">tamara_installment</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_company_branch_view_tree" model="ir.ui.view">
+        <field name="name">res_company_branch.view.tree</field>
+        <field name="model">res.company.branch</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name"></field>
+                <field name="parent_id"></field>
+                <field name="company_id" />
+                <field name="warehouse_id" />
+            </tree>
+        </field>
+    </record>
+    <record id="res_company_branch_views_view_form" model="ir.ui.view">
+        <field name="name">res_company_branch_views.view.form</field>
+        <field name="model">res.company.branch</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />
+                    <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+                </header>
+                <sheet>
+                    <div name="options" groups="base.group_user">
+                        <field name="is_salla_checker" invisible="1" />
+                        <span class="d-inline-block">
+                            <field name="is_salla" />
+                            <label for="is_salla" />
+                        </span>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"  required="1"/>
+                            <field name="company_id" required="1"/>
+                            <field name="warehouse_id" required="1"/>
+                            <field name="parent_id" />
+                            <field name="salla_id" readonly="1" force_save="1" options="{'format': 0}" />
+                            <field name="status" />
+                            <field name="latitude" required="1"/>
+                            <field name="longitude" required="1"/>
+                            <field name="telephone" required="1"/>
+                            <field name="whatsapp" required="1"/>
+                            <field name="phone" required="1"/>
+                            <field name="address_description" required="1"/>
+                            <field name="additional_number" required="1"/>
+                            <field name="building_number" required="1"/>
+                            <field name="street" required="1"/>
+                            <field name="local" required="1"/>
+                            <field name="postal_code" required="1"/>
+                        </group>
+                        <group>
+                            <field name="country_id" required="1"/>
+                            <field name="city_id" required="1" domain="[('country_id','=',country_id)]" context="{'default_country_id':country_id}"/>
+                            <field name="preparation_timestr" required="1"/>
+                            <field name="is_open" readonly="1" force_save="1" />
+                            <field name="opening_time" readonly="1" force_save="1"/>
+                            <field name="closing_time" readonly="1" force_save="1"/>
+                            <field name="is_cod_available" />
+                            <field name="type"  required="1"/>
+                            <field name="is_default" />
+                            <field name="cod_cost" />
+                        </group>
+                        <notebook attrs="{'invisible':[('type','!=','branch')]}">
+                            <page string="Working hours">
+                                <field name="workin_times"  widget="one2many" nolabel="1">
+                                    <tree editable="bottom" >
+                                        <field name="branch_id" invisible="1"></field>
+                                        <field name="name"></field>
+                                        <field name="from_time" placeholder="HH:MM"/>
+                                        <field name="to_time" placeholder="HH:MM"/>
+                                        <field name="enabled" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="rec_company_branch_action" model="ir.actions.act_window">
+        <field name="name">Branch</field>
+        <field name="res_model">res.company.branch</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

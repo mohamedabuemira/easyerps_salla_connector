@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- 
+        
+    profit = fields.Float()
+    
+    notes = fields.Text()
+    visits_count = fields.Integer()
+    aff_links = fields.Char()
+    stat_links = fields.Char()
+-->
+    <record id="salla_affiliates_view_tree" model="ir.ui.view">
+        <field name="name">salla_affiliates.view.tree</field>
+        <field name="model">salla.affiliates</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="salla_id" />
+                <field name="code" />
+                <field name="amount" />
+                <field name="marketer_name" />
+                <field name="apply_to" />
+            </tree>
+        </field>
+    </record>
+<record id="salla_affiliates_view_form" model="ir.ui.view">
+    <field name="name">salla_affiliates.view.form</field>
+    <field name="model">salla.affiliates</field>
+    <field name="arch" type="xml">
+        <form string="">
+            <header>
+                <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />
+                <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+            </header>
+            <sheet>
+                <group>
+                    <group>
+                    <field name="code" required="1"/>
+                    <field name="marketer_name" required="1"/>
+                    <field name="marketer_city" required="1"/>
+                    <field name="commission_type" required="1"/>
+                    <field name="apply_to" required="1"/>
+                    <field name="amount" required="1"/>
+                    </group>
+                    <group>
+                    <field name="profit" readonly="1" force_save="1"/>
+                    <field name="visits_count" readonly="1" force_save="1"/>
+                    <field name="aff_links" readonly="1" force_save="1"/>
+                    <field name="stat_links" readonly="1" force_save="1"/>
+                    <field name="notes" required="1"/>
+                    </group>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+<record id="salla_affiliates_action" model="ir.actions.act_window">
+    <field name="name">Salla Affiliates</field>
+    <field name="res_model">salla.affiliates</field>
+    <field name="view_mode">tree,form</field>
+</record>
+</odoo>

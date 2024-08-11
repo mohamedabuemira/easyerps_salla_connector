@@ -1,0 +1,48 @@
+"id",model_name,name,description
+store_branch_created,company.branch,store.branch.created,Creates a new store.
+store_branch_updated,company.branch,store.branch.updated,Updates an existing branch
+store_branch_setDefault,company.branch,store.branch.setDefault,Sets for default a specific branch
+store_branch_activated,company.branch,store.branch.activated,Activates a disabled branch
+store_branch_deleted,company.branch,store.branch.deleted,Deletes a branch
+storetax_created,company.branch,storetax.created,Creats a new Store Tax
+coupon_applied,coupon,coupon.applied,Creates a discount code in the form of a coupon
+shipping_zone_created,delivery.carrier,shipping.zone.created,This is triggered when a shipping zone has been created for a custom shipping company
+shipping_zone_updated,delivery.carrier,shipping.zone.updated,This is triggered when a shipping zone has been updated for a custom shipping company
+shipping_company_created,delivery.carrier,shipping.company.created,This is triggered when a custom shipping company has been created
+shipping_company_updated,delivery.carrier,shipping.company.updated,This is triggered when a custom shipping company has been updated
+shipping_company_deleted,delivery.carrier,shipping.company.deleted,This is triggered when a custom shipping company has been deleted
+brand_created,product.brand,brand.created,Creates a new Brand.
+brand_updated,product.brand,brand.updated,Triggered when Information about a sepcific Brand is updated/refurbished/streamlined
+brand_deleted,product.brand,brand.deleted,An existing brand is then deleted and removed from a store
+category_created,product.category,category.created,Creates a new category for products to be put under
+category_updated,product.category,category.updated,Add new or reform existing category details
+specialoffer_created,product.offers,specialoffer.created,Creates a new special offer
+specialoffer_updated,product.offers,specialoffer.updated,Updates a special offer
+product_created,product.product,product.created,A new product is created. Payload of the new product are to accompanying the product
+product_updated,product.product,product.updated,Add/Modify details of a product
+product_deleted,product.product,product.deleted,Delete a product along with all its variants and images
+product_available,product.product,product.available,Flags a product as stock available
+product_quantity_low,product.product,product.quantity.low,Shows warnings whenever a stock is of low quantity
+review_added,product.product,review.added,A product review has been added
+customer_created,res.partner,customer.created,Create a new customer record
+customer_updated,res.partner,customer.updated,Update details for a customer
+customer_login,res.partner,customer.login,Triggered whenever a customer log in
+customer_otp_request,res.partner,customer.otp.request,One-Time Password request for a customer
+order_created,sale.order,order.created,This is triggered when an order has been created.
+order_updated,sale.order,order.updated,This is triggered when an order has been updated.
+order_status_updated,sale.order,order.status.updated,This is triggered when an order status has been updated.
+order_cancelled,sale.order,order.cancelled,This is triggered when an order has been cancelled.
+order_refunded,sale.order,order.refunded,This is triggered when an order has been refunded.
+order_deleted,sale.order,order.deleted,This is triggered when an order has been deleted.
+order_products_updated,sale.order,order.products.updated,This is triggered when an order products have been updated.
+order_payment_updated,sale.order,order.payment.updated,This is triggered when an order payment has been updated.
+order_coupon_updated,sale.order,order.coupon.updated,This is triggered when an order coupon has been updated.
+order_total_price_updated,sale.order,order.total.price.updated,This is triggered when an order total price has been updated.
+order_shipment_creating,sale.order,order.shipment.creating,This is triggered when an order shipment is being created.
+order_shipment_created,sale.order,order.shipment.created,This is triggered when an order shipment return has been created.
+order_shipment_cancelled,sale.order,order.shipment.cancelled,This is triggered when an order shipment return has been cancelled.
+order_shipment_return_creating,sale.order,order.shipment.return.creating,This is triggered when an order shipment return is being created.
+order_shipment_return_created,sale.order,order.shipment.return.created,This is triggered when an order shipment return has been created.
+order_shipment_return_cancelled,sale.order,order.shipment.return.cancelled,This is triggered when an order shipment return has been cancelled.
+order_shipping_address_updated,sale.order,order.shipping.address.updated,This is triggered when an order shipment shipping address has been updated.
+abandoned_cart,sale.order,abandoned.cart,Outputs a list of abandoned carts

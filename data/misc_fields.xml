@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- 
+    
+-->
+    <record id="product_mapping_price" model="product.fields.mapping">
+        <field name="name">Price</field>
+        <field name="fields_name">lst_price</field>
+    </record>
+    <record id="product_mapping_quantity" model="product.fields.mapping">
+        <field name="name">quantity</field>
+        <field name="fields_name">available_qty</field>
+    </record>
+
+    <record id="product_mapping_sku" model="product.fields.mapping">
+        <field name="name">SKU</field>
+        <field name="fields_name">default_code</field>
+    </record>
+    <record id="product_mapping_name" model="product.fields.mapping">
+        <field name="name">name</field>
+        <field name="fields_name">name</field>
+    </record>
+    <record id="product_mapping_status" model="product.fields.mapping">
+        <field name="name">Status</field>
+        <field name="fields_name">salla_status</field>
+    </record>
+    <record id="product_mapping_imagess" model="product.fields.mapping">
+        <field name="name">Images</field>
+        <field name="fields_name">image_1920</field>
+    </record>
+    <record id="product_mapping_optionss" model="product.fields.mapping">
+        <field name="name">Options</field>
+        <field name="fields_name">options_ids</field>
+    </record>
+
+    <record id="auto_sync_country" model="auto.syncer.objects">
+        <field name="name">Country</field>
+        <field name="model_name">res.country</field>
+    </record>
+
+<!--    <record id="auto_sync_city" model="auto.syncer.objects">-->
+<!--        <field name="name">City</field>-->
+<!--        <field name="model_name">res.city</field>-->
+<!--    </record>-->
+<!--    <record id="auto_sync_currency" model="auto.syncer.objects">-->
+<!--        <field name="name">Currency</field>-->
+<!--        <field name="model_name">res.currency</field>-->
+<!--    </record>-->
+    <record id="auto_sync_branch" model="auto.syncer.objects">
+        <field name="name">Branch</field>
+        <field name="model_name">res.company.branch</field>
+    </record>
+    <record id="auto_sync_tax" model="auto.syncer.objects">
+        <field name="name">Tax</field>
+        <field name="model_name">account.tax</field>
+    </record>
+    <record id="auto_sync_payment_method" model="auto.syncer.objects">
+        <field name="name">Payment Method</field>
+        <field name="model_name">account.payment.method</field>
+    </record>
+    <record id="auto_sync_brand" model="auto.syncer.objects">
+        <field name="name">Brand</field>
+        <field name="model_name">product.brand</field>
+    </record>
+    <record id="auto_sync_product_tags" model="auto.syncer.objects">
+        <field name="name">Product Tags</field>
+        <field name="model_name">product.tags</field>
+    </record>
+    <record id="auto_sync_category" model="auto.syncer.objects">
+        <field name="name">Category</field>
+        <field name="model_name">product.category</field>
+    </record>
+    <record id="auto_sync_product" model="auto.syncer.objects">
+        <field name="name">Product</field>
+        <field name="model_name">product.product</field>
+    </record>
+    <record id="auto_sync_salla_affiliates" model="auto.syncer.objects">
+        <field name="name">Affiliates</field>
+        <field name="model_name">salla.affiliates</field>
+    </record>
+    <record id="auto_sync_salla_advertisement" model="auto.syncer.objects">
+        <field name="name">Advertisement</field>
+        <field name="model_name">salla.advertisement</field>
+    </record>
+    <record id="auto_sync_salla_coupon" model="auto.syncer.objects">
+        <field name="name">Coupon</field>
+        <field name="model_name">salla.coupon</field>
+    </record>
+    <record id="auto_sync_salla_offers" model="auto.syncer.objects">
+        <field name="name">Special offers</field>
+        <field name="model_name">salla.offers</field>
+    </record>
+    <record id="auto_sync_order_tags" model="auto.syncer.objects">
+        <field name="name">Order Tags</field>
+        <field name="model_name">sale.order.tags</field>
+    </record>
+    <record id="auto_sync_order_status" model="auto.syncer.objects">
+        <field name="name">Order Status</field>
+        <field name="model_name">sale.order.status</field>
+    </record>
+    <record id="auto_sync_shipping_company" model="auto.syncer.objects">
+        <field name="name">Shipping Company</field>
+        <field name="model_name">shipping.company</field>
+    </record>
+    <record id="auto_sync_shipping_rules" model="auto.syncer.objects">
+        <field name="name">Shipping Rules</field>
+        <field name="model_name">shipping.rules</field>
+    </record>
+    <record id="auto_sync_shipping_zone" model="auto.syncer.objects">
+        <field name="name">Shipping zone</field>
+        <field name="model_name">shipping.zone</field>
+    </record>
+    <record id="auto_sync_customer_groups" model="auto.syncer.objects">
+        <field name="name">Customer Groups</field>
+        <field name="model_name">customer.groups</field>
+    </record>
+    <record id="auto_sync_customer" model="auto.syncer.objects">
+        <field name="name">Customer</field>
+        <field name="model_name">res.partner</field>
+    </record>
+    <record id="auto_sync_order" model="auto.syncer.objects">
+        <field name="name">Order</field>
+        <field name="model_name">sale.order</field>
+    </record>
+</odoo>

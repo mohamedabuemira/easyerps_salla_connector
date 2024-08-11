@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_order_status_view_tree" model="ir.ui.view">
+        <field name="name">sale_order_status.view.tree</field>
+        <field name="model">sale.order.status</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="salla_id" />
+                <field name="is_active" />
+                <field name="original_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="sale_order_status_view_form" model="ir.ui.view">
+        <field name="name">sale_order_status.view.form</field>
+        <field name="model">sale.order.status</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />
+                    <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="salla_id" readonly="1" force_save="1" />
+                            <field name="name" required="1" />
+                            <field name="type" required="1" />
+                            <field name="message" required="1"/>
+                            <field name="color" />
+                            <field name="icon" />
+                        </group>
+                        <group>
+                            <field name="parent_id" domain="[('type','=','original')]" required="1"/>
+                            <field name="original_id" readonly="1" force_save="1"/>
+                            <field name="sort" />
+                            <field name="is_active" />
+                        </group>
+                    </group>
+                    <group string="Children">
+                        <field name="children_ids" widget="many2many_tags" nolabel="1" readonly="1" force_save="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="sale_order_status_action" model="ir.actions.act_window">
+        <field name="name">Order Status</field>
+        <field name="res_model">sale.order.status</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="salla_root_menu"
+        name="Salla Shop"
+        sequence="10" />
+
+    <menuitem
+        id="salla_dashboard_menu"
+        name="Salla Dashboard"
+        parent="salla_root_menu"
+        action="salla_dashboard_action"
+        sequence="10" />
+    <menuitem
+        id="salla_configuration_menu"
+        name="Configuration"
+        parent="salla_root_menu"
+        sequence="100" />
+    <menuitem
+        id="salla_company_configuration_menu"
+        name="Stores"
+        parent="salla_configuration_menu"
+        action="salla_dashboard__store_config_action"
+        sequence="10" />
+    <menuitem
+        id="salla_webhooks_configuration_menu"
+        name="Webhooks"
+        parent="salla_configuration_menu"
+        action="salla_webhooks_action"
+        sequence="20" />
+    <menuitem
+        id="salla_webhooks_event_list_configuration_menu"
+        name="Webhooks Event List"
+        parent="salla_configuration_menu"
+        action="salla_webhook_event_list_action"
+        sequence="30" />
+    <!-- 
+        <menuitem
+        id="salla_product_option_values_menu"
+        name="Option Values"
+        parent="salla_configuration_menu"
+        action="salla_dashboard__store_config_action"
+        sequence="20" />
+        -->
+    <menuitem
+        id="salla_objects_menu"
+        name="Objects"
+        parent="salla_root_menu"
+        sequence="20" />
+
+    <menuitem
+        id="salla_object_base_menu"
+        name="Base"
+        parent="salla_objects_menu"
+        sequence="10" />
+
+    <!-- BASIC-->
+    <menuitem
+        id="salla_customer_groups_menu"
+        name="Customer Groups"
+        parent="salla_object_base_menu"
+        action="customer_groups_action"
+        sequence="9" />
+    <menuitem
+        id="salla_branches_menu"
+        name="Branches"
+        parent="salla_object_base_menu"
+        action="rec_company_branch_action"
+        sequence="10" />
+    <menuitem
+        id="salla_taxes_menu"
+        name="Taxes"
+        parent="salla_object_base_menu"
+        action="account.action_tax_form"
+        sequence="200" />
+    <!-- PRODUCTS-->
+    <menuitem
+        id="salla_object_product_menu_menu"
+        name="Product"
+        parent="salla_objects_menu"
+        sequence="20" />
+
+    <menuitem
+        id="salla_brands_menu"
+        name="Brands"
+        parent="salla_object_product_menu_menu"
+        action="product_brand_action"
+        sequence="20" />
+    <menuitem
+        id="salla_product_tags_menu"
+        name="Product Tags"
+        parent="salla_object_product_menu_menu"
+        action="product_tags_action"
+        sequence="30" />
+    <menuitem
+        id="salla_category_menu"
+        name="Categories"
+        parent="salla_object_product_menu_menu"
+        action="product.product_category_action_form"
+        sequence="40" />
+
+    <menuitem
+        id="salla_product_menu"
+        name="Products"
+        parent="salla_object_product_menu_menu"
+        action="product.product_normal_action_sell"
+        sequence="50" />
+
+    <!-- PRODUCTS-->
+    <menuitem
+        id="salla_object_orders_menu_menu"
+        name="Orders"
+        parent="salla_objects_menu"
+        sequence="30" />
+    <menuitem
+        id="salla_sale_order_tags_menu"
+        name="Order Tags"
+        parent="salla_object_orders_menu_menu"
+        action="sale_order_tags_action"
+        sequence="60" />
+    <menuitem
+        id="salla_sale_order_status_menu"
+        name="Order Status"
+        parent="salla_object_orders_menu_menu"
+        action="sale_order_status_action"
+        sequence="70" />
+    <menuitem
+        id="salla_account_payment_method_action_menu"
+        name="Payments Method"
+        parent="salla_object_orders_menu_menu"
+        action="account_payment_method_action"
+        sequence="80" />
+
+    <!-- Marketing-->
+    <menuitem
+        id="salla_object_marketing_menu_menu"
+        name="Marketing"
+        parent="salla_objects_menu"
+        sequence="90" />
+    <menuitem
+        id="salla_marketing_affiliates_menu"
+        name="Affiliates"
+        parent="salla_object_marketing_menu_menu"
+        action="salla_affiliates_action"
+        sequence="10" />
+    <menuitem
+        id="salla_marketing_advertisement_menu"
+        name="Advertisements"
+        parent="salla_object_marketing_menu_menu"
+        action="salla_advertisement_action"
+        sequence="20" />
+    <menuitem
+        id="salla_marketing_coupon_menu"
+        name="Coupons"
+        parent="salla_object_marketing_menu_menu"
+        action="salla_coupon_action"
+        sequence="30" />
+    <menuitem
+        id="salla_marketing_offers_menu"
+        name="Special Offers"
+        parent="salla_object_marketing_menu_menu"
+        action="salla_offers_action"
+        sequence="40" />
+    <!-- Shippments-->
+    <menuitem
+        id="salla_object_shipment_menu_menu"
+        name="Shipmments"
+        parent="salla_objects_menu"
+        sequence="100" />
+    <menuitem
+        id="salla_shipping_company_action_menu"
+        name="Shipping Company"
+        parent="salla_object_shipment_menu_menu"
+        action="shipping_company_action"
+        sequence="90" />
+    <menuitem
+        id="salla_shipping_rules_action_menu"
+        name="Shipping Rules"
+        parent="salla_object_shipment_menu_menu"
+        action="shipping_rule_action"
+        sequence="100" />
+
+    <menuitem
+        id="salla_shipping_zones_action_menu"
+        name="Shipping Zones"
+        parent="salla_object_shipment_menu_menu"
+        action="shipping_zone_action"
+        sequence="110" />
+
+
+</odoo>

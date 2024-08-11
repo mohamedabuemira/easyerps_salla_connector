@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="shipping_zone_view_tree" model="ir.ui.view">
+        <field name="name">shipping_zone.view.tree</field>
+        <field name="model">shipping.zone</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="salla_id" readonly="1" force_save="1" />
+                <field name="name"  />
+                <field name="company_id" required="1" />
+                <field name="city_id" required="1" />
+                <field name="cities_excluded_ids" required="1" widget="many2many_tags" />
+                <field name="duration" />
+            </tree>
+        </field>
+    </record>
+    <record id="shipping_zone_view_form" model="ir.ui.view">
+        <field name="name">shipping_zone.view.form</field>
+        <field name="model">shipping.zone</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />
+                    <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"  />
+                            <field name="salla_id"  options="{'format': 0}" readonly="1" force_save="1"/>
+                            <field name="company_id"  required="1" domain="[('activation_type','=','manual')]" options="{'no_create': True}"/>
+                            <field name="all_country_id" required="1"/>
+                            <field name="country_id" attrs="{'invisible': [('all_country_id', '=', True)],'required':[('all_country_id','=',False)]}" options="{'no_create': True}"/>
+                            <field name="all_city_id" required="1" />
+                            <field name="city_id" domain="[('country_id','=',country_id)]" context="{'default_country_id':country_id}" options="{'no_create': True}"
+                                   attrs="{'invisible': [('all_city_id', '=', True)],'required':[('all_city_id','=',False)]}"/>
+                            <field name="duration" required="1"/>
+                            <field name="cities_excluded_ids"  widget="many2many_tags" domain="[('country_id','=',country_id)]" options="{'no_create': True}"
+                                   attrs="{'invisible': ['|',('all_city_id', '=', False),('all_country_id', '=', True)]}"/>
+
+                        </group>
+                        <group>
+                            <field name="fees_type" required="1"/>
+                            <field name="fees_amount" required="1"/>
+<!--                            <field name="currency_id" />-->
+                            <field name="up_to_weight" attrs="{'invisible': [('fees_type', '=', 'fixed')],'required':[('fees_type','=','rate')]}" />
+                            <field name="amount_per_unit" attrs="{'invisible': [('fees_type', '=', 'fixed')],'required':[('fees_type','=','rate')]}"/>
+                            <field name="per_unit" attrs="{'invisible': [('fees_type', '=', 'fixed')],'required':[('fees_type','=','rate')]}"/>
+                            <field name="cod_activated" />
+                            <field name="cod_fees" attrs="{'invisible': [('cod_activated', '=', False)],'required':[('cod_activated','=',True)]}"/>
+                        </group>
+                    </group>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="shipping_zone_action" model="ir.actions.act_window">
+        <field name="name">Shipping Zones</field>
+        <field name="res_model">shipping.zone</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_tags_view_tree" model="ir.ui.view">
+        <field name="name">product_tags.view.tree</field>
+        <field name="model">product.tags</field>
+        <field name="arch" type="xml">
+            <tree string="" editable="bottom">
+                <field name="salla_id" readonly="1" force_save="1"></field>
+                <field name="name" />
+<!--                <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />-->
+                <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_order_tags_view_tree" model="ir.ui.view">
+        <field name="name">sale_order_tags.view.tree</field>
+        <field name="model">sale.order.tags</field>
+        <field name="arch" type="xml">
+            <tree string="" editable="bottom">
+                <field name="salla_id" readonly="1" force_save="1"></field>
+                <field name="name" />
+<!--                <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />-->
+                <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+            </tree>
+        </field>
+    </record>
+    <record id="product_tags_action" model="ir.actions.act_window">
+        <field name="name">Product Tags</field>
+        <field name="res_model">product.tags</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="sale_order_tags_action" model="ir.actions.act_window">
+        <field name="name">Sale Tags</field>
+        <field name="res_model">sale.order.tags</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

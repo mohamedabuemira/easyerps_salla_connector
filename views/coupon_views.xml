@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="salla_coupon_view_tree" model="ir.ui.view">
+        <field name="name">salla_coupon.view.tree</field>
+        <field name="model">salla.coupon</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="salla_id" />
+                <field name="code" />
+                <field name="type" />
+                <field name="amount" />
+            </tree>
+        </field>
+    </record>
+    <record id="salla_coupon_view_form" model="ir.ui.view">
+        <field name="name">salla_coupon.view.form</field>
+        <field name="model">salla.coupon</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />
+                    <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="salla_id" readonly="1" force_save="1" />
+                            <field name="status" required="1" />
+                            <field name="applied_in" readonly="1" force_save="1"/>
+                            <field name="is_group" />
+                            <field name="group_name" attrs="{'required':[('is_group','=',True)],'invisible': [('is_group', '=', False)]}" />
+                            <field name="group_suffix" attrs="{'required':[('is_group','=',True)],'invisible': [('is_group', '=', False)]}" />
+                            <field name="group_coupons_count"
+                                attrs="{'required':[('is_group','=',True)],'invisible': [('is_group', '=', False)]}" />
+                            <field name="group_coupons" widget="many2many_tags" readonly="1"
+                            force_save="1" options="{'no_create': True}" attrs="{'invisible': ['|',('is_group', '=', False),('group_coupons', '=', False)]}" />
+                            <field name="code" attrs="{'required':[('is_group','=',False)],'invisible': [('is_group', '=', True)]}" />
+                            <field name="type" required="1" />
+                            <field name="amount" required="1" />
+                            <field name="maximum_amount" attrs="{'required':[('type','=','percentage')],'invisible': [('type', '!=', 'percentage')]}"/>
+                            <field name="start_date" />
+                            <field name="expiry_date" required="1" />
+                            <field name="free_shipping" required="1"/>
+                            <field name="exclude_sale_products" required="1"/>
+                            <field name="minimum_amount" />
+                            <field name="usage_limit" />
+                            <field name="usage_limit_per_user" />
+                            <field name="show_maximum_amount" />
+                        </group>
+                        <group>
+                                <field name="marketing_active" />
+                                <field name="marketing_name"
+                                    attrs="{'required':[('marketing_active','=',True)],'invisible': [('marketing_active', '=', False)]}" />
+                                <field name="marketing_type"
+                                    attrs="{'required':[('marketing_active','=',True)],'invisible': [('marketing_active', '=', False)]}" />
+                                <field name="marketing_amount"
+                                    attrs="{'required':[('marketing_active','=',True)],'invisible': [('marketing_active', '=', False)]}" />
+                                <field name="marketing_maximum_amount"
+                                    attrs="{'required':[('marketing_type','=','percentage')],'invisible': ['|',('marketing_active', '=', False),('marketing_type','!=','percentage')]}" />
+                                <field name="marketing_show_maximum_amount"
+                                    attrs="{'invisible': ['|',('marketing_active', '=', False),('marketing_type','!=','percentage')]}" />
+                                <field name="marketing_hide_total_sales"
+                                    attrs="{'invisible': [('marketing_active', '=', False)]}" />
+                                <field name="marketing_info"
+                                    attrs="{'invisible': [('marketing_active', '=', False)]}" />
+                                <field name="marketing_visits_count" readonly="1" force_save="1"
+                                    attrs="{'invisible': ['|',('marketing_active', '=', False),('marketing_visits_count', '=', False)]}" />
+                                <field name="marketing_url" readonly="1" force_save="1"
+                                    attrs="{'invisible': ['|',('marketing_active', '=', False),('marketing_url', '=', False)]}" />
+                                <field name="marketing_statistics_url" readonly="1" force_save="1"
+                                    attrs="{'invisible': ['|',('marketing_active', '=', False),('marketing_statistics_url', '=', False)]}" />
+<!--                            <h1>statistics</h1>-->
+                                <field name="statistics_num_of_usage" readonly="1" force_save="1"/>
+                                <field name="statistics_num_of_customers" readonly="1" force_save="1"/>
+                                <field name="statistics_coupon_sales_amount" readonly="1" force_save="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="include_on_coupon" string="Include on Coupon">
+                        <group>
+                            <field name="include_payment_methods" widget="many2many_tags" options="{'no_create': True}"/>
+                            <field name="list_include_categories" widget="many2many_tags" domain="[ ('salla_id', '!=', False)]" options="{'no_create': True}"/>
+                            <field name="products_include" widget="many2many_tags" domain="[ ('tmpl_salla_id', '!=', False)]" options="{'no_create': True}"/>
+                            <field name="list_include_groups" widget="many2many_tags" domain="[ ('salla_id', '!=', False)]" options="{'no_create': True}"/>
+                            <field name="beneficiary_domain" />
+                        </group>
+                    </page>
+                        <page name="exclude_on_coupon" string="Exclude on Coupon">
+                        <group>
+                            <field name="list_exclude_categories" widget="many2many_tags" domain="[ ('salla_id', '!=', False)]" options="{'no_create': True}"/>
+                            <field name="list_exclude_brands" widget="many2many_tags" domain="[ ('is_salla', '!=', False)]" options="{'no_create': True}"/>
+                            <field name="products_exclude" widget="many2many_tags" domain="[ ('tmpl_salla_id', '!=', False)]" options="{'no_create': True}"/>
+                            <field name="list_exclude_groups" widget="many2many_tags" domain="[ ('salla_id', '!=', False)]" options="{'no_create': True}"/>
+                        </group>
+                    </page>
+                    </notebook>
+
+<!--                    <group>-->
+<!--                        <field name="list_include_brands" widget="many2many_tags" />-->
+
+<!--                    </group>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="salla_coupon_action" model="ir.actions.act_window">
+        <field name="name">Salla Coupon</field>
+        <field name="res_model">salla.coupon</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

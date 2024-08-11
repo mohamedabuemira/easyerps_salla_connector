@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_category_view_form" model="ir.ui.view">
+        <field name="name">product_category.view.form</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet" position="before">
+                <header>
+                    <button string="Import from Salla" type="object" name="action_fetch" class="btn btn-success" />
+                    <button string="Export to Salla" type="object" name="action_pull" class="btn btn-warning" />
+                </header>
+            </xpath>
+            <xpath expr="//group[@name='first']" position="before">
+
+
+                <div name="options" groups="base.group_user">
+                    <field name="is_salla_checker" invisible="1" />
+                    <span class="d-inline-block">
+                        <field name="is_salla" />
+                        <label for="is_salla" />
+                    </span>
+                </div>
+            </xpath>
+            <xpath expr="//group[@name='first']" position="after">
+              <group name="salla_property" >
+                        <group string="Salla Properties" >
+                            <field name="salla_id" readonly="1" force_save="1" options="{'format': 0}"/>
+                            <field name="sort_order" options="{'format': 0}"/>
+                            <field name="status" readonly="1" force_save="1" />
+                        </group>
+                    </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
